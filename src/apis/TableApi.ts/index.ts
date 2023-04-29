@@ -5,7 +5,7 @@ const getTradeInfo = async () => {
   const res = await axios('mock_data.json')
 
   if (res.status === 200) {
-    return res.data as TableItem
+    return res.data as TableItem[]
   }
   return null
 }
