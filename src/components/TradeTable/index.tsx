@@ -1,11 +1,8 @@
 /* eslint-disable array-callback-return */
 import { TableItem } from '../../Type'
 
-interface ITradeTableProps {
-  trade: TableItem[]
-}
-
-function TradeTable({ trade }: ITradeTableProps) {
+function TradeTable(props: { trade: TableItem[] }) {
+  const { trade } = props
   return trade.map((item: TableItem) => {
     ;<div>
       <div>{item.id}</div>
