@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query'
 import { Container, Image } from '@chakra-ui/react'
-import getTradeInfo from '@apis/TableApi'
-import { filterTradeByDate } from '@utils/filter'
-import TradeTable from '@components/TradeTable'
+import getTradeInfo from '../../apis/TableApi'
+import { filterTradeByDate } from '../../utils/filter'
+import TradeTable from '../../components/TradeTable'
 
 const TODAY = '2023-03-08'
 
