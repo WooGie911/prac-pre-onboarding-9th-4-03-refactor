@@ -1,4 +1,4 @@
-import { TableItem } from '../../Type'
+import { TableItem } from '../Type'
 
 export const sortByIDASC = (initTrade: TableItem[]) => {
   return initTrade.sort((now, other) => Number(now.id) - Number(other.id))

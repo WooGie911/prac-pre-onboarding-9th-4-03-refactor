@@ -1,4 +1,4 @@
-import { TableItem } from '../../Type'
+import { TableItem } from '../Type'
 
 export const filterTradeByDate = (
   initTrade: TableItem[] | undefined | null,
