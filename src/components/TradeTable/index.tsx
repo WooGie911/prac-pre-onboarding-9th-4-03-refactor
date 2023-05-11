@@ -1,7 +1,10 @@
 /* eslint-disable array-callback-return */
+import { useState } from 'react'
 import { Tr, Td } from '@chakra-ui/react'
+import { usePagination } from 'pagination-react-js'
 import TradeTableItem from '../TradeTableItem'
 import { TableItem } from '../../Type'
+import PaginationBar from '../PaginationBar'
 
 function TradeTableItems({ nowTrade }: { nowTrade: TableItem[] }) {
   if (nowTrade.length > 0)
@@ -24,9 +27,20 @@ function TradeTableItems({ nowTrade }: { nowTrade: TableItem[] }) {
 function TradeTable(props: { trade: TableItem[] }) {
   const { trade } = props
 
+  const [tradeLength, setTradeLength] = useState(trade.length)
+
+  const { currentPage, entriesPerPage, entries } = usePagination(1, 50)
+
   return (
     <div>
-      <TradeTableItems nowTrade={trade} />
+      <PaginationBar
+        currentPage={currentPage}
+        entriesPerPage={entriesPerPage}
+        tradeLength={tradeLength}
+      />
+      <TradeTableItems
+        nowTrade={trade.slice(entries.indexOfFirst, entries.indexOfLast)}
+      />
     </div>
   )
 }
