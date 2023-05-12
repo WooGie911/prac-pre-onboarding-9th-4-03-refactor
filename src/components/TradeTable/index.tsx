@@ -6,6 +6,16 @@ import TradeTableItem from '../TradeTableItem'
 import { TableItem } from '../../Type'
 import PaginationBar from '../PaginationBar'
 import useSearchParamsURL from '../../hooks/useSearchParamsURL'
+import {
+  sortByIDASC,
+  sortByIDDESC,
+  sortByTransactonTimeASC,
+  sortByTransactonTimeDESC,
+} from '../../utils/sort'
+import {
+  filterTradeByCustomerName,
+  filterTradeByStatus,
+} from '../../utils/filter'
 
 function TradeTableItems({ nowTrade }: { nowTrade: TableItem[] }) {
   if (nowTrade.length > 0)
@@ -68,6 +78,17 @@ function TradeTable(props: { trade: TableItem[] }) {
     },
     [sortBy]
   )
+
+  const filterAll = useCallback(() => {
+    let result = [...trade]
+    if (name) {
+      result = filterTradeByCustomerName(result, name)
+    }
+    result = filterTradeByStatus(result, status ?? 'all')
+    result = sortTrade(result)
+
+    return result
+  }, [trade, name, status, sortTrade])
 
   useEffect(() => {
     setSearchParams({ page: currentPageGet.toString() })
