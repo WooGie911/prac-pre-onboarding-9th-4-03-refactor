@@ -31,8 +31,25 @@ function TradeTable(props: { trade: TableItem[] }) {
   const { currentPage, entriesPerPage, entries } = usePagination(1, 50)
 
   const { setSearchParams, getSearchParams } = useSearchParamsURL()
-
   const { set: currentPageSet, get: currentPageGet } = currentPage
+
+  const sortBy = getSearchParams('sort_by')
+
+  const sortTrade = useCallback(
+    (nowTrade: TradeItem[]) => {
+      switch (sortBy) {
+        case 'time_ASC':
+          return sortByTransactonTimeASC(nowTrade)
+        case 'time_DESC':
+          return sortByTransactonTimeDESC(nowTrade)
+        case 'id_DESC':
+          return sortByIDDESC(nowTrade)
+        default:
+          return sortByIDASC(nowTrade)
+      }
+    },
+    [sortBy]
+  )
 
   useEffect(() => {
     setSearchParams({ page: currentPageGet.toString() })
