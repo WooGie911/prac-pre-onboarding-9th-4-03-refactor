@@ -34,6 +34,12 @@ function TradeTable(props: { trade: TableItem[] }) {
   const { set: currentPageSet, get: currentPageGet } = currentPage
 
   const sortBy = getSearchParams('sort_by')
+  const status = getSearchParams('status')
+
+  const searchByStatus = (e: MouseEvent<HTMLButtonElement>) => {
+    setSearchParams({ status: e.currentTarget.value })
+    currentPageSet(1)
+  }
 
   const sortTrade = useCallback(
     (nowTrade: TradeItem[]) => {
