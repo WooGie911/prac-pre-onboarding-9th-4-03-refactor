@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import { useEffect, useState } from 'react'
+import { MouseEvent, useCallback, useEffect, useState } from 'react'
 import { Tr, Td } from '@chakra-ui/react'
 import { usePagination } from 'pagination-react-js'
 import TradeTableItem from '../TradeTableItem'
@@ -28,21 +28,33 @@ function TradeTableItems({ nowTrade }: { nowTrade: TableItem[] }) {
 function TradeTable(props: { trade: TableItem[] }) {
   const { trade } = props
   const [tradeLength, setTradeLength] = useState(trade.length)
-  const { currentPage, entriesPerPage, entries } = usePagination(1, 50)
 
   const { setSearchParams, getSearchParams } = useSearchParamsURL()
-  const { set: currentPageSet, get: currentPageGet } = currentPage
 
   const sortBy = getSearchParams('sort_by')
   const status = getSearchParams('status')
+  const page = getSearchParams('page')
+  const name = getSearchParams('name')
+
+  const { currentPage, entriesPerPage, entries } = usePagination(
+    Number(page.length === 0 ? 1 : page),
+    50
+  )
+  const { set: currentPageSet, get: currentPageGet } = currentPage
 
   const searchByStatus = (e: MouseEvent<HTMLButtonElement>) => {
     setSearchParams({ status: e.currentTarget.value })
     currentPageSet(1)
   }
 
+  const searchByName = (inputName: string) => {
+    const encodedSearchTerm = encodeURIComponent(inputName)
+    setSearchParams({ name: encodedSearchTerm })
+    currentPageSet(1)
+  }
+
   const sortTrade = useCallback(
-    (nowTrade: TradeItem[]) => {
+    (nowTrade: TableItem[]) => {
       switch (sortBy) {
         case 'time_ASC':
           return sortByTransactonTimeASC(nowTrade)
