@@ -94,6 +94,10 @@ function TradeTable(props: { trade: TableItem[] }) {
     setSearchParams({ page: currentPageGet.toString() })
   }, [currentPageGet, setSearchParams])
 
+  useEffect(() => {
+    setTradeLength(filterAll().length)
+  }, [filterAll])
+
   return (
     <div>
       <PaginationBar
