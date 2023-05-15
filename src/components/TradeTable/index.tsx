@@ -28,6 +28,7 @@ import {
 } from '../../utils/filter'
 import SearchInput from '../SearchInput'
 import SortIcon from '../SortIcon'
+import StatusButton from '../StatusButton'
 
 function TradeTableItems({ nowTrade }: { nowTrade: TableItem[] }) {
   if (nowTrade.length > 0)
