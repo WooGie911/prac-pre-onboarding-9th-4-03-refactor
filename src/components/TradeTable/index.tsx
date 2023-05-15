@@ -1,6 +1,16 @@
 /* eslint-disable array-callback-return */
 import { MouseEvent, useCallback, useEffect, useState } from 'react'
-import { Tr, Td } from '@chakra-ui/react'
+import {
+  Tr,
+  Td,
+  Grid,
+  GridItem,
+  Table,
+  TableCaption,
+  Thead,
+  Th,
+  Tbody,
+} from '@chakra-ui/react'
 import { usePagination } from 'pagination-react-js'
 import TradeTableItem from '../TradeTableItem'
 import { TableItem } from '../../Type'
@@ -16,6 +26,8 @@ import {
   filterTradeByCustomerName,
   filterTradeByStatus,
 } from '../../utils/filter'
+import SearchInput from '../SearchInput'
+import SortIcon from '../SortIcon'
 
 function TradeTableItems({ nowTrade }: { nowTrade: TableItem[] }) {
   if (nowTrade.length > 0)
@@ -100,14 +112,49 @@ function TradeTable(props: { trade: TableItem[] }) {
 
   return (
     <div>
-      <PaginationBar
-        currentPage={currentPage}
-        entriesPerPage={entriesPerPage}
-        tradeLength={tradeLength}
-      />
-      <TradeTableItems
-        nowTrade={trade.slice(entries.indexOfFirst, entries.indexOfLast)}
-      />
+      <Grid templateColumns="repeat(2, 1fr)">
+        <GridItem colSpan={1}>
+          <PaginationBar
+            currentPage={currentPage}
+            entriesPerPage={entriesPerPage}
+            tradeLength={tradeLength}
+          />
+        </GridItem>
+        <GridItem colSpan={1}>
+          <SearchInput onClickHandler={searchByName} />
+        </GridItem>
+      </Grid>
+
+      <Table variant="striped" colorScheme="gray">
+        <TableCaption>Order List</TableCaption>
+        <Thead>
+          <Tr>
+            <Th>
+              ID
+              <SortIcon typeID="id" sortBy={sortBy} />
+            </Th>
+            <Th>
+              Transaction Time
+              <SortIcon typeID="time" sortBy={sortBy} />
+            </Th>
+            <Th>
+              status
+              <StatusButton status={status} searchByStatus={searchByStatus} />
+            </Th>
+            <Th>Customer ID</Th>
+            <Th>Customer Name</Th>
+            <Th>Price</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          <TradeTableItems
+            nowTrade={filterAll().slice(
+              entries.indexOfFirst,
+              entries.indexOfLast
+            )}
+          />
+        </Tbody>
+      </Table>
     </div>
   )
 }
