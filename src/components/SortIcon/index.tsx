@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable import/no-extraneous-dependencies */
 import { IconButton } from '@chakra-ui/react'
-import useUrlSearch from '../../hooks/useSearchParamsURL'
+import { ChevronUpIcon, ChevronDownIcon } from '@chakra-ui/icons'
+import useSearchParamsURL from '../../hooks/useSearchParamsURL'
 
 interface ISortIconProps {
   typeID: string
@@ -8,7 +10,7 @@ interface ISortIconProps {
 }
 
 function SortIcon({ typeID, sortBy }: ISortIconProps) {
-  const { setSearchParams } = useUrlSearch()
+  const { setSearchParams } = useSearchParamsURL()
   const [sortType, sortOrder] = sortBy.split('_')
   const color = typeID === sortType ? 'teal' : 'gray'
 
@@ -30,6 +32,7 @@ function SortIcon({ typeID, sortBy }: ISortIconProps) {
         variant="unstyled"
         aria-label="down"
         data-testid={`sort-button-${typeID}`}
+        icon={<ChevronDownIcon />}
         color={color}
         onClick={() => iconClickHandler(typeID)}
       />
@@ -40,6 +43,7 @@ function SortIcon({ typeID, sortBy }: ISortIconProps) {
       aria-label="up"
       data-testid={`sort-button-${typeID}`}
       color={color}
+      icon={<ChevronUpIcon />}
       onClick={() => iconClickHandler(typeID)}
     />
   )
