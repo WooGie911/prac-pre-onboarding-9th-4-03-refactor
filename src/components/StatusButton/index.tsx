@@ -1,6 +1,6 @@
-/* eslint-disable prettier/prettier */
 import { MouseEvent } from 'react'
 import { Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 
 interface IStatusButtonProps {
   status: string
@@ -15,6 +15,7 @@ function StatusButton({ status, searchByStatus }: IStatusButtonProps) {
         size="xs"
         as={Button}
         minW="95px"
+        rightIcon={<ChevronDownIcon />}
       >
         {status.length ? status : 'all'}
       </MenuButton>
