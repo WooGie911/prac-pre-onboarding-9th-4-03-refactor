@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable array-callback-return */
 import { MouseEvent, useCallback, useEffect, useState } from 'react'
 import {
@@ -12,6 +13,7 @@ import {
   Tbody,
 } from '@chakra-ui/react'
 import { usePagination } from 'pagination-react-js'
+import styled from '@emotion/styled'
 import TradeTableItem from '../TradeTableItem'
 import { TableItem } from '../../Type'
 import PaginationBar from '../PaginationBar'
@@ -125,39 +127,46 @@ function TradeTable(props: { trade: TableItem[] }) {
           <SearchInput onClickHandler={searchByName} />
         </GridItem>
       </Grid>
-
-      <Table variant="striped" colorScheme="gray">
-        <TableCaption>Order List</TableCaption>
-        <Thead>
-          <Tr>
-            <Th>
-              ID
-              <SortIcon typeID="id" sortBy={sortBy} />
-            </Th>
-            <Th>
-              Transaction Time
-              <SortIcon typeID="time" sortBy={sortBy} />
-            </Th>
-            <Th>
-              status
-              <StatusButton status={status} searchByStatus={searchByStatus} />
-            </Th>
-            <Th>Customer ID</Th>
-            <Th>Customer Name</Th>
-            <Th>Price</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          <TradeTableItems
-            nowTrade={filterAll().slice(
-              entries.indexOfFirst,
-              entries.indexOfLast
-            )}
-          />
-        </Tbody>
-      </Table>
+      <WrapperDiv>
+        <Table variant="striped" colorScheme="gray">
+          <TableCaption>Order List</TableCaption>
+          <Thead>
+            <Tr>
+              <Th>
+                ID
+                <SortIcon typeID="id" sortBy={sortBy} />
+              </Th>
+              <Th>
+                Transaction Time
+                <SortIcon typeID="time" sortBy={sortBy} />
+              </Th>
+              <Th>
+                status
+                <StatusButton status={status} searchByStatus={searchByStatus} />
+              </Th>
+              <Th>Customer ID</Th>
+              <Th>Customer Name</Th>
+              <Th>Price</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            <TradeTableItems
+              nowTrade={filterAll().slice(
+                entries.indexOfFirst,
+                entries.indexOfLast
+              )}
+            />
+          </Tbody>
+        </Table>
+      </WrapperDiv>
     </div>
   )
 }
 
 export default TradeTable
+
+const WrapperDiv = styled.div`
+  border: 1px solid lightgray;
+  margin-top: 5px;
+  border-radius: 5px;
+`
