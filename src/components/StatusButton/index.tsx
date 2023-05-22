@@ -16,6 +16,7 @@ function StatusButton({ status, searchByStatus }: IStatusButtonProps) {
         as={Button}
         minW="95px"
         rightIcon={<ChevronDownIcon />}
+        margin="5px"
       >
         {status.length ? status : 'all'}
       </MenuButton>
