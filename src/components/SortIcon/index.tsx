@@ -35,6 +35,7 @@ function SortIcon({ typeID, sortBy }: ISortIconProps) {
         icon={<ChevronDownIcon />}
         color={color}
         onClick={() => iconClickHandler(typeID)}
+        margin="5px"
       />
     )
   return (
@@ -45,6 +46,7 @@ function SortIcon({ typeID, sortBy }: ISortIconProps) {
       color={color}
       icon={<ChevronUpIcon />}
       onClick={() => iconClickHandler(typeID)}
+      margin="5px"
     />
   )
 }
