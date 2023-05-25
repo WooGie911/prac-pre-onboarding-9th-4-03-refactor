@@ -35,8 +35,6 @@ function PaginationBar({
           navNext: 'pagination-item nav-item',
           navStart: 'pagination-item nav-item',
           navEnd: 'pagination-item nav-item',
-          navPrevCustom: 'pagination-item',
-          navNextCustom: 'pagination-item',
         }}
         navStart="&#171;"
         navEnd="&#187;"
