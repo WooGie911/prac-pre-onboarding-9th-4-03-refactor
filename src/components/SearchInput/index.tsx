@@ -6,6 +6,7 @@ import {
   Button,
   IconButton,
 } from '@chakra-ui/react'
+import { SmallCloseIcon } from '@chakra-ui/icons'
 
 interface ISearchInputProps {
   onClickHandler: (inputValue: string) => void
@@ -42,6 +43,7 @@ function SearchInput({ onClickHandler }: ISearchInputProps) {
           mr="2px"
           color="gray"
           onClick={deleteClickHandler}
+          icon={<SmallCloseIcon />}
         />
         <Button h="1.75rem" size="sm" onClick={buttonClickHandler}>
           search
