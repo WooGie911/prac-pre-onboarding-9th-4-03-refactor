@@ -41,11 +41,12 @@ function SearchInput({ onClickHandler }: ISearchInputProps) {
           size="xs"
           variant="unstyled"
           mr="2px"
+          mb="2px"
           color="gray"
           onClick={deleteClickHandler}
           icon={<SmallCloseIcon />}
         />
-        <Button h="1.75rem" size="sm" onClick={buttonClickHandler}>
+        <Button h="1.75rem" mr="3px" size="sm" onClick={buttonClickHandler}>
           search
         </Button>
       </InputRightElement>
