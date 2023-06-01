@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useQuery } from 'react-query'
 import { Container, Image } from '@chakra-ui/react'
 import getTradeInfo from '../../apis/TableApi'
